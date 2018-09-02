@@ -61,7 +61,6 @@ class Grapher:
               "labels": states['No'],
               "domain": {"x": [0, .48]},
               "name": "Unsolved",
-              "text": ["Unsolved"],
               "textposition": "inside",
               "hoverinfo":"label+percent+name",
               "hole": .4,
@@ -70,7 +69,6 @@ class Grapher:
             {
               "values": incidents['Yes'],
               "labels": states['Yes'],
-              "text":["Solved"],
               "textposition":"inside",
               "domain": {"x": [.52, 1]},
               "name": "Solved",
@@ -83,20 +81,20 @@ class Grapher:
                 "annotations": [
                     {
                         "font": {
-                            "size": 20
+                            "size": 18
                         },
                         "showarrow": False,
                         "text": "Unsolved",
-                        "x": 0.20,
+                        "x": 0.19,
                         "y": 0.5
                     },
                     {
                         "font": {
-                            "size": 20
+                            "size": 18
                         },
                         "showarrow": False,
                         "text": "Solved",
-                        "x": 0.78,
+                        "x": 0.79,
                         "y": 0.5
                     }
                 ]
@@ -104,5 +102,4 @@ class Grapher:
         }
         #fig = go.Figure(data=data, layout=layout)
 
-        plotly.offline.plot(fig, auto_open=True)
-        return fig
+        return plotly.offline.plot(fig, include_plotlyjs=True, output_type='div')

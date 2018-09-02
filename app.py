@@ -59,9 +59,8 @@ def stack_test():
         insert_value_into(weapon_name, count, incidents)
         names = years.keys()
 
-    data = graph.stack_bar(years, incidents, names, graph_format)
-    return str(data)
-
+    graph_div = graph.stack_bar(years, incidents, names, graph_format)
+    return render_template('stack_result.html', graph_div=graph_div)
 
 @app.route('/inputtest')
 def input_test():
@@ -117,8 +116,8 @@ def pie_test():
         count = row[2]
         insert_value_into(solved, state, states)
         insert_value_into(solved, count, incidents)
-    graph.pie_chart(incidents, states, 'Solved or Unsolved by State')
-    return str(states) + "\n\n" + str(incidents)
+    graph_div = graph.pie_chart(incidents, states, 'Solved or Unsolved by State')
+    return render_template('pie_result.html', graph_div=graph_div)
 
 
 if __name__ == '__main__':
