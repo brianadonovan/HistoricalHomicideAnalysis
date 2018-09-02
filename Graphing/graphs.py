@@ -51,8 +51,7 @@ class Grapher:
             )
         fig = go.Figure(data=data, layout=layout)
 
-        plotly.offline.plot(fig, auto_open=True)
-        return data
+        return plotly.offline.plot(fig, include_plotlyjs=True, output_type='div')
 
     def pie_chart(self, incidents, states, title):
         fig = {

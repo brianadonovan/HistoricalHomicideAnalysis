@@ -29,8 +29,11 @@ def hello_world():
 @app.route('/', methods=['POST'])
 def hello_world_post():
     age_range = request.form['age_range']
+    age_min_max = age_range.split(' - ')
+    age_min_max = list(map(int, age_min_max))
     relationship = request.form['relationship']
-    return age_range
+    return age_min_max
+
 
 @app.route('/dbtest')
 def db_test():
@@ -63,8 +66,16 @@ def stack_test():
 @app.route('/inputtest')
 def input_test():
     relationship = request.args.get('relationship')
-    perp_age_min = request.args.get('perp_age_min')
-    perp_age_max = request.args.get('perp_age_max')
+    age_range = request.args.get('age_range')
+
+    age_min_max = age_range.split(' - ')
+    age_min_max = list(map(int, age_min_max))
+    # age_range = request.form['age_range']
+    # relationship = request.form['relationship']
+    perp_age_min = age_min_max[0]
+    perp_age_max = age_min_max[1]
+    # perp_age_min = request.args.get('perp_age_min')
+    # perp_age_max = request.args.get('perp_age_max')
     rows = db.relationship_weapon(relationship, perp_age_min, perp_age_max)
     incidents = {}
     ages = {}
@@ -88,10 +99,11 @@ def input_test():
             add_value_into_age_range(4, weapon, count, incidents)
     weapons = incidents.keys()
 
-
     for weapon in weapons:
         ages[weapon] = ['1-17', '18-34', '35-50', '51-70', '71-110']
-    data = graph.stack_bar(ages, incidents, weapons, graph_format)
+    graph_div = graph.stack_bar(ages, incidents, weapons, graph_format)
+
+    return render_template('result.html', graph_div=graph_div)
 
 
 @app.route('/pietest')
