@@ -20,6 +20,30 @@ class DatabaseInterface:
         self.connection.commit()
         return list(zip(weapons, years, incident_counts))
 
+    def status_per_state(self):
+        self.execute_statement(fetch_status_per_state_sql())
+        states = []
+        status = []
+        incident_counts = []
+        for(state, solved, incident_count) in self.cursor:
+            states.append(state)
+            status.append(solved)
+            incident_counts.append(incident_count)
+        self.connection.commit()
+        return list(zip(states, status, incident_counts))
+
+    def relationship_weapon(self,relationship, perp_age_min, perp_age_max):
+        self.execute_statement(fetch_relationship_age_sql(relationship, perp_age_min, perp_age_max))
+        weapons = []
+        victim_ages = []
+        incidents = []
+        for(weapon, victim_age, incident) in self.cursor:
+            weapons.append(weapon)
+            victim_ages.append(victim_age)
+            incidents.append(incident)
+        self.connection.commit()
+        return list(zip(weapons, victim_ages, incidents))
+
     def handguns_per_year(self):
         self.execute_statement(fetch_handgun_incidents_sql())
         years = []

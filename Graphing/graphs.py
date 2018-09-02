@@ -21,20 +21,89 @@ class Grapher:
 
     def stack_bar(self, x_values, y_values, names, title):
         data = []
-        for weapon in names:
+        for name in names:
             trace = go.Bar(
-                x=x_values[weapon],
-                y=y_values[weapon],
-                name=weapon
+                x=x_values[name],
+                y=y_values[name],
+                name=name
             )
             data.append(trace)
 
         layout = go.Layout(
             barmode='stack',
-            title=title
-        )
+            title=title,
+            xaxis = dict(
+                title='Year',
+                titlefont=dict(
+                    family='Arial, monospace',
+                    size=18,
+                    color='#7f7f7f'
+                )
+            ),
+            yaxis = dict(
+                title='Number of Incidents',
+                titlefont=dict(
+                    family='Arial, monospace',
+                    size=18,
+                    color='#7f7f7f'
+                )
+            )
+            )
         fig = go.Figure(data=data, layout=layout)
 
         plotly.offline.plot(fig, auto_open=True)
         return data
 
+    def pie_chart(self, incidents, states, title):
+        fig = {
+          "data": [
+            {
+              "values": incidents['No'],
+              "labels": states['No'],
+              "domain": {"x": [0, .48]},
+              "name": "Unsolved",
+              "text": ["Unsolved"],
+              "textposition": "inside",
+              "hoverinfo":"label+percent+name",
+              "hole": .4,
+              "type": "pie"
+            },
+            {
+              "values": incidents['Yes'],
+              "labels": states['Yes'],
+              "text":["Solved"],
+              "textposition":"inside",
+              "domain": {"x": [.52, 1]},
+              "name": "Solved",
+              "hoverinfo":"label+percent+name",
+              "hole": .4,
+              "type": "pie"
+            }],
+          "layout": {
+                "title":"Solved or Unsolved Homicides by State",
+                "annotations": [
+                    {
+                        "font": {
+                            "size": 20
+                        },
+                        "showarrow": False,
+                        "text": "Unsolved",
+                        "x": 0.20,
+                        "y": 0.5
+                    },
+                    {
+                        "font": {
+                            "size": 20
+                        },
+                        "showarrow": False,
+                        "text": "Solved",
+                        "x": 0.78,
+                        "y": 0.5
+                    }
+                ]
+            }
+        }
+        #fig = go.Figure(data=data, layout=layout)
+
+        plotly.offline.plot(fig, auto_open=True)
+        return fig
