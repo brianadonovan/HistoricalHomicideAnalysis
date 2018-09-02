@@ -22,7 +22,7 @@ def fetch_relationship_age_sql(relationship, perp_age_min, perp_age_max):
     return 'SELECT WEAPON, VICTIM_AGE, COUNT(WEAPON) ' \
            'FROM HOMICIDE ' \
            "WHERE RELATIONSHIP = '{0}' AND " \
-           'PERPETRATOR_AGE > {1} AND ' \
-           'PERPETRATOR_AGE < {2} ' \
+           'PERPETRATOR_AGE >= {1} AND ' \
+           'PERPETRATOR_AGE <= {2} ' \
            'GROUP BY WEAPON, VICTIM_AGE '.format(relationship, perp_age_min, perp_age_max)
 

@@ -19,7 +19,7 @@ class Grapher:
             "layout": go.Layout(title=title)
         }, auto_open=True)
 
-    def stack_bar(self, x_values, y_values, names, title):
+    def stack_bar(self, x_values, y_values, names, graph_format):
         data = []
         for name in names:
             trace = go.Bar(
@@ -31,9 +31,9 @@ class Grapher:
 
         layout = go.Layout(
             barmode='stack',
-            title=title,
+            title=graph_format['title'],
             xaxis = dict(
-                title='Year',
+                title=graph_format['x_axis'],
                 titlefont=dict(
                     family='Arial, monospace',
                     size=18,
@@ -41,7 +41,7 @@ class Grapher:
                 )
             ),
             yaxis = dict(
-                title='Number of Incidents',
+                title=graph_format['y_axis'],
                 titlefont=dict(
                     family='Arial, monospace',
                     size=18,

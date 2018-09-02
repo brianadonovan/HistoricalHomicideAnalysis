@@ -1,4 +1,6 @@
 from flask import Flask
+from flask import request
+from flask import render_template
 from Database.database import DatabaseInterface
 from Graphing.graphs import Grapher
 
@@ -19,10 +21,16 @@ def add_value_into_age_range(age_range, key, value, dictionary):
     dictionary[key][age_range] += value
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def hello_world():
-    return 'Hello World!'
+    return render_template('index.html')
 
+
+@app.route('/', methods=['POST'])
+def hello_world_post():
+    age_range = request.form['age_range']
+    relationship = request.form['relationship']
+    return age_range
 
 @app.route('/dbtest')
 def db_test():
@@ -39,6 +47,7 @@ def stack_test():
     rows = db.most_used_weapon_per_year()
     years = {}
     incidents = {}
+    graph_format = {'x_axis': 'Year', 'y_axis': 'Number of Incidents', 'title': 'Homicide Weapons Used by Year'}
     for row in rows:
         weapon_name = row[0]
         year = row[1]
@@ -47,15 +56,22 @@ def stack_test():
         insert_value_into(weapon_name, count, incidents)
         names = years.keys()
 
-    data = graph.stack_bar(years, incidents, names, "Weapons per Year")
+    data = graph.stack_bar(years, incidents, names, graph_format)
     return str(data)
 
 
 @app.route('/inputtest')
 def input_test():
-    rows = db.relationship_weapon('Father', 35, 50)
+    relationship = request.args.get('relationship')
+    perp_age_min = request.args.get('perp_age_min')
+    perp_age_max = request.args.get('perp_age_max')
+    rows = db.relationship_weapon(relationship, perp_age_min, perp_age_max)
     incidents = {}
     ages = {}
+    title = '{0} (Ages {1}-{2}) : Weapons per Victim Ages'.format(relationship, perp_age_min, perp_age_max)
+    graph_format = {'x_axis': 'Age Range of Victim (years)',
+                    'y_axis': 'Incident Count',
+                    'title': title}
     for row in rows:
         weapon = row[0]
         age = row[1]
@@ -71,9 +87,11 @@ def input_test():
         elif age >= 71 and age <= 110 not in ages:
             add_value_into_age_range(4, weapon, count, incidents)
     weapons = incidents.keys()
+
+
     for weapon in weapons:
         ages[weapon] = ['1-17', '18-34', '35-50', '51-70', '71-110']
-    data = graph.stack_bar(ages, incidents, weapons, "Weapons per Victim Ages")
+    data = graph.stack_bar(ages, incidents, weapons, graph_format)
 
 
 @app.route('/pietest')

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>US Homicide Analysis</title>
+
+
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+      <div class = "container">
+	<div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <h1>Analysis of US Homicides from 1980 to 2014 </h1>
+
+
+        <div class="jumbotron">
+            <h2>Weapons Used for Homicides by Relationship</h2>
+            <h4>Select the following to see which weapons were used most on victim age groups...</h4>
+            <hr />
+                <form action="/" method="post">
+                <p>Perpetrator Relationship to Victim </p>
+                <select required name="relationship">
+                <option value ="" disabled selected> Please Select...</option>
+                <option value="Wife">Wife</option>
+                <option value="Stranger">Stranger</option>
+                <option value="Stepson">Stepson</option>
+                <option value="Stepmother">Stepmother</option>
+                <option value="Stepfather">Stepfather</option>
+                <option value="Stepdaughter">Stepdaughter</option>
+                <option value="Son">Son</option>
+                <option value="Sister">Sister</option>
+                <option value="Neighbor">Neighbor</option>
+                <option value="Mother">Mother</option>
+                <option value="In-Law">In-Law</option>
+                <option value="Husband">Husband</option>
+                <option value="Girlfriend">Girlfriend</option>
+                <option value="Friend">Friend</option>
+                <option value="Father">Father</option>
+                <option value="Family">Family</option>
+                <option value="Ex-Wife">Ex-Wife</option>
+                <option value="Ex-Husband">Ex-Husband</option>
+                <option value="Employer">Employer</option>
+                <option value="Employee">Employee</option>
+                <option value="Daughter">Daughter</option>
+                <option value="Common-Law Wife">Common-Law Wife</option>
+                <option value="Common-Law Husband">Common-Law Husband</option>
+                <option value="Brother">Brother</option>
+                <option value="Boyfriend/Girlfriend">Boyfriend/Girlfriend</option>
+                <option value="Boyfriend">Boyfriend</option>
+                <option value="Acquaintance">Acquaintance</option>
+                </select>
+
+
+                <p> Age of Perpetrator</p>
+               <select required name="age_range">
+                   <option value ="" disabled selected> Please Select...</option>
+                   <option value="1 - 17">1 - 17</option>
+                   <option value="18 - 34">18 - 34</option>
+                   <option value="35 - 50">35 - 50</option>
+                   <option value="51 - 70">51 - 70</option>
+                   <option value="71 - 110">71 - 110</option>
+
+                   <p class="lead"></p>
+                   <br><input type = "submit" class="btn btn-lg btn-success" value= "CONFIGURE">
+
+               </select></form>
+            <br>
+
+
+	</div>
+
+<div class="row marketing">
+            <div class="col-lg-6">
+                <h5>About:</h5>
+                <p>Information for this web page was provided by the<a href = https://www.kaggle.com/jyzaguirre/us-homicide-reports> Kaggle dataset</a>.
+                    Developing and analyis done by Briana Donovan. The following link leads to the developer's github page:<a href = https://github.com/brianadonovan> Briana Donovan </a>
+
+            </div>
+        </div>
+</body>
+
+</html>
