@@ -1,0 +1,40 @@
+    body {background-color: rgb(153, 153, 153);
+
+
+        }
+    h1 { color: rgb(128, 0, 0)}
+
+    .jumbotron {
+        background-color: rgb(190, 190, 190);
+    }
+
+    .btn {
+
+        background-color: rgb(179, 0, 0);
+        border-color: rgb(179, 0, 0);
+        color: white;
+    }
+
+    .nav-pills .pill-1 .nav-link {
+    background-color: rgb(179, 0, 0);
+    color: white; }
+
+    .nav-pills .pill-2 .nav-link {
+    background-color: rgb(179, 0, 0);
+    color: white;}
+
+    .nav-pills .pill-3 .nav-link {
+    background-color: rgb(179, 0, 0);
+    color: white;}
+
+    .nav-pills .pill-1 .nav-link:not(.active) {
+    background-color: rgb(128, 0, 0);
+    color: white;}
+
+    .nav-pills .pill-2 .nav-link:not(.active) {
+    background-color: rgb(128, 0, 0);
+    color: white;}
+
+    .nav-pills .pill-3 .nav-link:not(.active) {
+    background-color: rgb(128, 0, 0);
+    color: white;}
